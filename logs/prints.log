@@ -1,0 +1,4 @@
+15:08:24.482 [TestNG-tests-2] INFO  Resources.base - Navigated to Home Page.
+15:08:24.778 [TestNG-tests-2] INFO  Resources.base - Successfully validated Navigation Bar.
+15:08:27.307 [TestNG-tests-1] INFO  Resources.base - Restricted User
+15:08:32.636 [TestNG-tests-1] INFO  Resources.base - Non-restricted user
