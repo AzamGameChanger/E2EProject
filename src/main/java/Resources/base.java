@@ -5,6 +5,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -21,13 +22,23 @@ public class base {
     public WebDriver initializeDriver() throws IOException {
 
         prop = new Properties();
+
         FileInputStream file = new FileInputStream
-                ("/Users/codewithazam/Desktop/Azam/E2EProject/src/main/java/Resources/data.properties");
+                (System.getProperty("user.dir") + "/src/main/java/Resources/data.properties");
         prop.load(file);
-        String browserName = prop.getProperty("browser");
-        if (browserName.equalsIgnoreCase("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "/Users/codewithazam/Downloads/chromedriver");
-            driver = new ChromeDriver();
+
+        //mvn test -Dbrowser=chrome
+        String browserName = System.getProperty("browser");
+        //String browserName = prop.getProperty("browser");
+
+        System.out.println(browserName);
+        if (browserName.contains("chrome")) {
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/java/Resources/chromedriver");
+            ChromeOptions options = new ChromeOptions();
+            if  (browserName.contains("headless")) {
+                options.addArguments("headless");
+            }
+            driver = new ChromeDriver(options);
         } else if (browserName.equalsIgnoreCase("firefox")) {
             driver = new FirefoxDriver();
             //webdriver.gecko.driver
@@ -39,11 +50,12 @@ public class base {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return driver;
     }
-    public String getScreenShotPath(String testCaseName,WebDriver driver) throws IOException {
-        TakesScreenshot ts= (TakesScreenshot) driver;
+
+    public String getScreenShotPath(String testCaseName, WebDriver driver) throws IOException {
+        TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
-        String destinationFile = System.getProperty("user.dir")+"/reports/"+testCaseName+".png";
-        FileUtils.copyFile(source,new File(destinationFile));
+        String destinationFile = System.getProperty("user.dir") + "/reports/" + testCaseName + ".png";
+        FileUtils.copyFile(source, new File(destinationFile));
         return destinationFile;
     }
 }

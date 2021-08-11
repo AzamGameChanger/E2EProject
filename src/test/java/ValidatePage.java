@@ -14,6 +14,7 @@ import java.io.IOException;
 
 public class ValidatePage extends base {
     public WebDriver driver;
+    LandingPage landingPage;
     public static Logger log = LogManager.getLogger(base.class.getName());
 
     @BeforeTest
@@ -25,8 +26,15 @@ public class ValidatePage extends base {
     @Test
     public void basePageNavigation() {
 
-        LandingPage landingPage = new LandingPage(driver);
-        Assert.assertEquals(landingPage.getTitle().getText(), "FEATURED CO123URSES");
+        landingPage = new LandingPage(driver);
+        Assert.assertEquals(landingPage.getTitle().getText(), "FEATURED COURSES");
+        log.info("Successfully validated Text message.");
+
+    }
+    @Test
+    public void validateHeader() {
+
+        Assert.assertEquals(landingPage.getHeader().getText(), "AN ACADEMY TO LEARN EVERYTHING ABOUT TESTING");
         log.info("Successfully validated Text message.");
 
     }
