@@ -8,7 +8,7 @@ public class ForgotPassword {
     public WebDriver driver;
 
     By email = By.cssSelector("#user_email");
-    By sendMeIntructions = By.xpath("//input[@type='submit']");
+    By sendMeInstructions = By.xpath("//input[@type='submit']");
 
     public ForgotPassword(WebDriver driver) {
         this.driver = driver;
@@ -18,6 +18,6 @@ public class ForgotPassword {
         return driver.findElement(email);
     }
     public WebElement clickSendMe(){
-        return driver.findElement(sendMeIntructions);
+        return driver.findElement(sendMeInstructions);
     }
 }
