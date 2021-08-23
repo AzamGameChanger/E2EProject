@@ -28,8 +28,8 @@ public class base {
         prop.load(file);
 
         //mvn test -Dbrowser=chrome
-        String browserName = System.getProperty("browser");
-        //String browserName = prop.getProperty("browser");
+        //String browserName = System.getProperty("browser");
+        String browserName = prop.getProperty("browser");
 
         System.out.println(browserName);
         if (browserName.contains("chrome")) {
